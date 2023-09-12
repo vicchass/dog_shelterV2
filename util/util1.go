@@ -1,8 +1,10 @@
 package util
 
-import "fmt"
+import (
+	"errors"
+)
 
-//declare the dog struct
+// declare the dog struct
 type Dog struct {
 	The_name  string
 	The_age   uint
@@ -35,15 +37,14 @@ func Return_breed_name(slice_breed []Breed) []string {
 	return breed_slice_name
 }
 
-//return a breed type based on its name
-func Return_breed(slice_breed []Breed, the_name string) Breed {
+// return a breed type based on its name
+func Return_breed(slice_breed []Breed, the_name string) (Breed, error) {
 	for _, v := range slice_breed {
 		if v.Name == the_name {
-			return v
+			return v, nil
 		}
 	}
 	empty_breed := Breed{}
-	fmt.Println("COULDNT FIND BREED")
-	return empty_breed
+	return empty_breed, errors.New("Can't find breed")
 
 }
